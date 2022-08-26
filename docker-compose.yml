@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  backend:
+    build: .
+    container_name: flask
+    networks:
+      - net
+    ports:
+      - 5000:5000
+    volumes:
+      - .:/project:ro
+  cache:
+    image: redis
+    container_name: redis
+    networks:
+      - net
+    ports:
+      - 6379:6379
+  app:
+      build: .
+      networks:
+        - net
+      command: "celery -A tasks worker --pool=solo -l INFO"
+      depends_on:
+        - backend
+        - cache
+      volumes:
+        - .:/work_test
+      environment:
+        - RESULT_BACKEND=redis://cache:6379/0
+        - BROKER_URL=redis://cache:6379/0
+
+networks:
+  net:
+    name: frnet
+    driver: bridge

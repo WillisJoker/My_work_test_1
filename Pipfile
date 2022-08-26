@@ -1,0 +1,30 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+werkzeug = "==2.1.2"
+flask = "==2.1.2"
+flask-restx = "==0.5.1"
+flask-redis = "*"
+redis = "*"
+celery = "*"
+pytest = "*"
+flask-testing = "*"
+config = "*"
+eventlet = "*"
+celery-progress = "*"
+pytest-cov = "*"
+requests = "*"
+nose = "*"
+hug = "*"
+mock = "*"
+docker = "*"
+gunicorn = "*"
+
+[dev-packages]
+autopep8 = "*"
+
+[requires]
+python_version = "3.8"
